@@ -51,6 +51,12 @@ public class Dictionary {
         words = wordsWithLength;
     }
 
+    public LinkedList<String> getWords() {
+        return words;
+    }
+    public void setWords(LinkedList newWords){
+        words = newWords;
+    }
     public String printDictionary(){
         String output = "";
         for(String word : words){
