@@ -11,33 +11,40 @@ import java.util.Scanner;
  */
 public class Dictionary {
     LinkedList<String> words = new LinkedList<>();
-    int maxLen; int minLen;
+    LinkedList<Integer> validWordLengths = new LinkedList<>();
     public Dictionary() throws FileNotFoundException {
-        maxLen = 0; minLen = 0;
         try {
             String word;
             Scanner file = new Scanner(new File("C:\\Users\\nicholasu750_lpsk12\\IdeaProjects\\hangmanwithatwist-nicholas-shortlastname\\dictionary.txt"));
             while (file.hasNextLine()) {
                 word = file.next();
-                if(minLen == 0 || word.length() < minLen){
-                    minLen = word.length();
-                }
-                if(maxLen == 0 || word.length() > maxLen){
-                    maxLen = word.length();
+                if(!validWordLengths.contains(word.length())){
+                    validWordLengths.add(word.length());
                 }
                 words.add(word);
             }
         } catch (FileNotFoundException e){
             throw new FileNotFoundException("Cannot find dictionary.txt");
         }
-        this.words = words; this.maxLen = maxLen; this.minLen = minLen;
+        this.words = words; this.validWordLengths = validWordLengths;
     }
+
+    /**
+     * Checks if there is a word with given length in the words from dictionary.txt
+     * @param length length of word to be checked
+     * @return if there is a word with that length
+     */
     public boolean validWordLength(int length){
-        if (length < minLen || length > maxLen){
-            return false;
+        if (validWordLengths.contains(length)){
+            return true;
         }
-        return true;
+        return false;
     }
+
+    /**
+     * Trims the dictionary to words only length letters long
+     * @param chosenLength the length of which words will be included
+     */
     public void setupDictionary(int chosenLength){
         LinkedList<String> wordsWithLength = new LinkedList<>();
         while (!words.isEmpty()){
@@ -51,12 +58,26 @@ public class Dictionary {
         words = wordsWithLength;
     }
 
+    /**
+     * Gets the current word list
+     * @return word list
+     */
     public LinkedList<String> getWords() {
         return words;
     }
+
+    /**
+     * Sets the current word list
+     * @param newWords new word list
+     */
     public void setWords(LinkedList newWords){
         words = newWords;
     }
+
+    /**
+     * Gets the word list in one string
+     * @return string of word list
+     */
     public String printDictionary(){
         String output = "";
         for(String word : words){
