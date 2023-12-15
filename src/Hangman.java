@@ -3,6 +3,8 @@ import java.util.LinkedList;
 
 /**
  * This class represents a game of Hangman
+ *
+ * @author Nicholas Un
  */
 public class Hangman {
     private int incorrectGuesses = 0;
@@ -18,7 +20,7 @@ public class Hangman {
     }
 
     /**
-     * Given a list of words and a guessed letter, calculate which group of words under which revealed letters would keep the group of words the biggest
+     * Given a list of words and a guessed letter, calculate which group of words with different revealed letters would keep the group of words the biggest
      * returns the words, keeps the revealed letters internal, but it can be called with getRevealedLetters
      * @param guess guessed letter
      * @param words group of words
@@ -26,19 +28,6 @@ public class Hangman {
      */
     public LinkedList<String> guess(Character guess, LinkedList<String> words){
         LinkedList<String> wordsBefore = words;
-
-        // test if there is only one correct answer and it was guessed
-        LinkedList<Character> testIfCorrect = lettersRevealed;
-        if(wordsBefore.size() == 1){
-            for (int i = 0; i < testIfCorrect.size(); i++){
-                if(testIfCorrect.get(i) == null){
-                    testIfCorrect.set(i, guess);
-                }
-            }
-            if(listToString(testIfCorrect) == wordsBefore.get(0)){
-                return null;
-            }
-        }
 
         // sort words into a hashmap of "word families"
         HashMap<LinkedList<Character>, LinkedList<String>> organizedWords = new HashMap<LinkedList<Character>, LinkedList<String>>();
@@ -115,19 +104,6 @@ public class Hangman {
                 lettersRevealed.set(i, guess);
             }
         }
-    }
-
-    /**
-     * Turns a list into a string
-     * @param list input list
-     * @returnstring of list
-     */
-    private String listToString(LinkedList<Character> list){
-        String output = "";
-        for (Character character: list) {
-            output += character;
-        }
-        return output;
     }
 
     /**

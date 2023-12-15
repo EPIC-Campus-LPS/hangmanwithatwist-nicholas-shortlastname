@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryTest {
-    Dictionary dictionary = new Dictionary();;
+    Dictionary dictionary = new Dictionary();
     public DictionaryTest() throws FileNotFoundException {
         this.dictionary = dictionary;
     }

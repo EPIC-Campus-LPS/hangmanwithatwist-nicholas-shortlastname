@@ -7,7 +7,7 @@ import java.util.Scanner;
  * This class runs a game of Hangman using the Hangman class.
  * It is responsible for the console program that players use to interact with the game.
  *
- * @author
+ * @author Nicholas Un
  */
 public class HangmanGame {
     public static void main(String[] args) throws FileNotFoundException {
@@ -48,8 +48,6 @@ public class HangmanGame {
                 if(runTotal){
                     System.out.println("There are currently " + dictionary.getWords().size() + " word(s) possible");
                 }
-
-                System.out.println(dictionary.printDictionary());
 
                 while (!(guess.length() == 1 && alphabet.contains(guess) && !prevGuesses.contains(guess))) {
                     System.out.print("Enter a valid alphabetical character that you have not guessed: ");
